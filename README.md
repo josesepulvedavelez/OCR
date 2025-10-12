@@ -1,6 +1,6 @@
 # OCR
 
-This is an API that is responsible for reading the data from Colombian ID cards. It uploads the document, and the application processes it and displays the information.
+This is an API that is responsible for reading the data from Colombian ID cards. It uploads the document, and the application processes and displays the information using Azure AI Document Intelligence technology.
 
 <img width="1768" height="1025" alt="image" src="https://github.com/user-attachments/assets/82799e76-6ef9-495f-9426-72555dce9b3f" />
 
