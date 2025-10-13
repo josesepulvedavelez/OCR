@@ -1,4 +1,5 @@
 
+using OCR.Api.Middlewares;
 using OCR.Application.IService;
 using OCR.Application.Service;
 
@@ -14,6 +15,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IIdCardService, IdCardService>();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
