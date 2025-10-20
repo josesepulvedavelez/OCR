@@ -18,6 +18,11 @@ namespace OCR.Api.Controllers
             _iIdCardService = iIdCardService;
         }
 
+        /// <summary>
+        /// Analyze a Colombian ID card and extract relevant information.
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         [HttpPost("AnalyzeDocument")]
         public async Task<ActionResult<ApiResult<IdCard>>> AnalyzeDocument(IFormFile file)
         {

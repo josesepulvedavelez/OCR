@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OCR.Api</name>
+    </assembly>
+    <members>
+        <member name="M:OCR.Api.Controllers.IdCardController.AnalyzeDocument(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Analyze a Colombian ID card and extract relevant information.
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
