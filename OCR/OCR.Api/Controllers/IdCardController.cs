@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OCR.Api.Common;
 using OCR.Application.IService;
+using OCR.Domain.Dto;
+using System.Reflection.Metadata;
 
 namespace OCR.Api.Controllers
 {
@@ -8,18 +11,18 @@ namespace OCR.Api.Controllers
     [ApiController]
     public class IdCardController : ControllerBase
     {
-        private readonly IIdCardService _cedulaService;
+        private readonly IIdCardService _iIdCardService;
 
-        public IdCardController(IIdCardService cedulaService)
+        public IdCardController(IIdCardService iIdCardService)
         {
-            _cedulaService = cedulaService;
+            _iIdCardService = iIdCardService;
         }
 
-        [HttpPost("AnalizarDocumento")]
-        public async Task<IActionResult> AnalizarDocumento(IFormFile file)
-        {            
-            var resultado = await _cedulaService.AnalyzeDocument(file);
-            return Ok(resultado);
+        [HttpPost("AnalyzeDocument")]
+        public async Task<ActionResult<ApiResult<IdCard>>> AnalyzeDocument(IFormFile file)
+        {
+            var result = await _iIdCardService.AnalyzeDocument(file);
+            return ApiResult<IdCard>.Ok(result);
         }
 
     }
