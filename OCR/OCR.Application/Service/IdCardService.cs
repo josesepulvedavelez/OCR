@@ -14,16 +14,13 @@ namespace OCR.Application.Service
 {
     public class IdCardService : IIdCardService
     {
-        private readonly IConfiguration _configuration;
-        private readonly DocumentIntelligenceClient _client;
-        public string endpoint;
-        public string key;        
+        private readonly DocumentIntelligenceClient _client;             
 
         public IdCardService(IConfiguration configuration)
         {
-            _configuration = configuration;
-            endpoint = _configuration["Azure:Endpoint"];
-            key = _configuration["Azure:Key"];
+            string endpoint = configuration["endpoint3"];
+            string key = configuration["key3"];
+
             _client = new DocumentIntelligenceClient(new Uri(endpoint), new AzureKeyCredential(key));            
         }
 

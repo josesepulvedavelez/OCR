@@ -1,8 +1,12 @@
+using Azure.Identity;
 using OCR.Api.Middlewares;
 using OCR.Application.IService;
 using OCR.Application.Service;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var keyVaultEndpoint = new Uri("https://ocrcolombia2.vault.azure.net/");
+builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
 
 // Configuration services
 builder.Services.AddControllers();
