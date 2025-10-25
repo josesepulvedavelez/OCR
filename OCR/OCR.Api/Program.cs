@@ -1,18 +1,30 @@
+using Azure.Identity;
 using OCR.Api.Middlewares;
 using OCR.Application.IService;
 using OCR.Application.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var keyVaultEndpoint = new Uri("https://ocrcolombia2.vault.azure.net/");
+builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
+
 // Configuration services
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
+// Swagger configuration
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "OCR API", Version = "v1" });
+    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    if (File.Exists(xmlPath))
+    {
+        c.IncludeXmlComments(xmlPath);
+    }
 });
 
-// Configuration CORS
+// CORS configuration
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -23,7 +35,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-// service registration
+// Service registration
 builder.Services.AddScoped<IIdCardService, IdCardService>();
 
 var app = builder.Build();
@@ -42,7 +54,5 @@ app.UseSwaggerUI(c =>
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
